@@ -1,89 +1,91 @@
-import { useState, useEffect } from 'react'
-import { useTheme, Theme } from 'contexts/ThemeContext'
-import {
-  ContainerFlexColumn,
-  ContainerFlexRow,
-  ContainerGrid,
-  Header
-} from 'styles/container'
-import { BackgroundColor, IconImage, ProfileImg } from 'styles/image'
-import { BoxImage, BoxInfo, BoxTravel, Travel, TravelNew } from 'styles/box'
-import { Input, LoginInput } from 'styles/inputs'
+import Header from 'components/Header'
+import ProfileImg from 'components/ProfileImg'
+import * as S from './style'
+import { useRouter } from 'next/router'
+import Cookies from 'js-cookie'
+import withAuth from 'utils/withAuth'
+import SideBar from 'components/SideBar'
 
 const Feed: React.FC = () => {
-  const { theme, setTheme } = useTheme()
-
-  useEffect(() => {
-    setTheme(Theme.Dark)
-    console.log('This is my context Theme ', theme)
-  }, [])
-
-  const [screenState, setSceenState] = useState(true)
+  const route = useRouter()
 
   return (
-    <ContainerGrid
-      style={{ width: '100%', height: '100%', background: '#e8f1f2' }}
-    >
-      <Header>
-        <h2 style={{ fontSize: '20px' }}>Menu</h2>
-        <LoginInput style={{ width: '30%', height: '60%', marginTop: '0' }}>
-          <IconImage src="img/search.svg" />
-          <Input type="text" placeholder="Pesquisa" />
-        </LoginInput>
-        <h1 style={{ fontSize: '40px' }}>My Trip</h1>
-        <ContainerFlexRow>
-          <ProfileImg
-            src="img/profile.jpg"
-            style={{ width: '50px', height: '50px' }}
-          />
-          <h2>Henrique</h2>
-        </ContainerFlexRow>
-      </Header>
-      <BoxTravel>
-        <TravelNew>
-          <ProfileImg
-            src="img/profile.jpg"
-            style={{ width: '40px', height: '40px' }}
-          />
-          <LoginInput
-            style={{
-              width: '40%',
-              height: '60%',
-              paddingLeft: '10px',
-              marginTop: '0'
-            }}
-          >
-            <Input type="text" placeholder="Nome da viagem" />
-          </LoginInput>
-          <p>Nova Viagem</p>
-        </TravelNew>
-        <Travel>
-          <ContainerFlexRow>
-            <ProfileImg
-              src="img/profile.jpg"
-              style={{ width: '40px', height: '40px' }}
-            />
-            <h1 style={{ marginLeft: '40%' }}>Estrada Real</h1>
-          </ContainerFlexRow>
-        </Travel>
-        <Travel>
-          <ContainerFlexRow>
-            <ProfileImg
-              src="img/profile.jpg"
-              style={{ width: '40px', height: '40px' }}
-            />
-            <h1 style={{ marginLeft: '40%' }}>Estrada Real</h1>
-          </ContainerFlexRow>
-          <ContainerFlexColumn>
-            <BoxImage></BoxImage>
-          </ContainerFlexColumn>
-        </Travel>
-      </BoxTravel>
-      <BoxInfo>
-        <h1>Amigos</h1>
-      </BoxInfo>
-    </ContainerGrid>
+    <S.ContainerFeed>
+      <Header />
+
+      <S.ContainerFlexRow>
+        <S.ContainerLeft>
+          <S.BoxTravel>
+            <ProfileImg />
+            <h2>Estrada Real</h2>
+            <S.TravelImg src="img/cachoeira.jpeg" />
+            <S.ContainerIconAction>
+              <img src="img/iconLike.svg" alt="" />
+              <p>15</p>
+              <img
+                src="img/iconComent.svg"
+                alt=""
+                style={{ marginLeft: '20px' }}
+              />
+              <p>3</p>
+            </S.ContainerIconAction>
+            <S.ContainerComent>
+              <img src="img/profile.jpg" alt="" />
+              <S.BoxInput
+                placeholder={'Adcionar um comentário...'}
+              ></S.BoxInput>
+            </S.ContainerComent>
+          </S.BoxTravel>
+          <S.BoxTravel>
+            <ProfileImg />
+            <h2>Estrada Real</h2>
+            <S.TravelImg src="img/cachoeira.jpeg" />
+            <S.ContainerIconAction>
+              <img src="img/iconLike.svg" alt="" />
+              <p>15</p>
+              <img
+                src="img/iconComent.svg"
+                alt=""
+                style={{ marginLeft: '20px' }}
+              />
+              <p>3</p>
+            </S.ContainerIconAction>
+            <S.ContainerComent>
+              <img src="img/profile.jpg" alt="" />
+              <S.BoxInput
+                placeholder={'Adcionar um comentário...'}
+              ></S.BoxInput>
+            </S.ContainerComent>
+          </S.BoxTravel>
+          <S.BoxTravel>
+            <ProfileImg />
+            <h2>Estrada Real</h2>
+            <S.TravelImg src="img/cachoeira.jpeg" />
+            <S.ContainerIconAction>
+              <img src="img/iconLike.svg" alt="" />
+              <p>15</p>
+              <img
+                src="img/iconComent.svg"
+                alt=""
+                style={{ marginLeft: '20px' }}
+              />
+              <p>3</p>
+            </S.ContainerIconAction>
+            <S.ContainerComent>
+              <img src="img/profile.jpg" alt="" />
+              <S.BoxInput
+                placeholder={'Adcionar um comentário...'}
+              ></S.BoxInput>
+            </S.ContainerComent>
+          </S.BoxTravel>
+        </S.ContainerLeft>
+
+        <S.ContainerRigth>
+          <SideBar />
+        </S.ContainerRigth>
+      </S.ContainerFlexRow>
+    </S.ContainerFeed>
   )
 }
 
-export default Feed
+export default withAuth(Feed)
